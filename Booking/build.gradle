@@ -1,0 +1,40 @@
+defaultTasks 'clean', 'test', 'aggregate'
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.4.34")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+dependencies {
+    compile 'net.serenity-bdd:serenity-core:3.2.0'
+    compile 'net.serenity-bdd:serenity-junit:3.2.0'
+    compile 'net.serenity-bdd:serenity-cucumber:3.2.0'
+    compile 'net.serenity-bdd:serenity-screenplay:3.2.0'
+    compile 'net.serenity-bdd:serenity-screenplay-webdriver:3.2.0'
+    testCompile 'junit:junit:4.13.2'
+    testCompile 'org.assertj:assertj-core:3.22.0'
+    testCompile 'org.slf4j:slf4j-simple:1.7.36'
+}
+
+test{
+    systemProperty 'useroutlook', System.getProperty('useroutlook')
+    systemProperty 'passoutlook', System.getProperty('passoutlook')
+    systemProperty 'usergmail', System.getProperty('usergmail')
+    systemProperty 'passgmail', System.getProperty('passgmail')
+}
+
+gradle.startParameter.continueOnFailure = true
